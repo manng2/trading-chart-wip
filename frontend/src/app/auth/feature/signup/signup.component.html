@@ -1,29 +1,75 @@
 <mat-card>
   <mat-card-header> Sign up form </mat-card-header>
   <mat-card-content>
-    <mat-form-field>
-      <mat-label>First name</mat-label>
-      <input matInput placeholder="First name" />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Last name</mat-label>
-      <input matInput placeholder="Last name" />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Email</mat-label>
-      <input matInput placeholder="Email" />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Password</mat-label>
-      <input matInput placeholder="Password" type="password" />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Confirm password</mat-label>
-      <input matInput placeholder="Password" type="password" />
-    </mat-form-field>
+    <form [formGroup]="formGroup">
+      <mat-form-field>
+        <mat-label>First name</mat-label>
+        <input matInput placeholder="First name" formControlName="firstName" />
+        <mat-error
+          *ngIf="
+            formGroup.controls.firstName.errors &&
+            formGroup.controls.firstName.errors['required']
+          "
+          >First name is required</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Last name</mat-label>
+        <input matInput placeholder="Last name" formControlName="lastName" />
+        <mat-error
+          *ngIf="
+            formGroup.controls.lastName.errors &&
+            formGroup.controls.lastName.errors['required']
+          "
+          >Last name is required</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" formControlName="email" />
+        <mat-error
+          *ngIf="
+            formGroup.controls.email.errors &&
+            formGroup.controls.email.errors['required']
+          "
+          >Email is required</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          placeholder="Password"
+          type="password"
+          formControlName="password"
+        />
+        <mat-error *ngIf="formGroup.controls.password.hasError('minlength')"
+          >Password length must be 8 characters</mat-error
+        >
+        <mat-error *ngIf="formGroup.controls.password.hasError('required')"
+          >Password is required</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Confirm password</mat-label>
+        <input
+          matInput
+          placeholder="Password"
+          type="password"
+          formControlName="confirmPassword"
+        />
+        <mat-error
+          *ngIf="formGroup.controls.confirmPassword.hasError('required')"
+          >Password is required</mat-error
+        >
+      </mat-form-field>
+      <mat-error *ngIf="formGroup.hasError('notMatching')">Password is not matched</mat-error>
+    </form>
   </mat-card-content>
   <mat-card-footer align="center">
-    <button mat-raised-button color="primary">Sign up</button>
+    <button mat-raised-button color="primary" [disabled]="formGroup.invalid">
+      Sign up
+    </button>
     <span (click)="goToLoginPage()">Already have an account? Login</span>
   </mat-card-footer>
 </mat-card>
