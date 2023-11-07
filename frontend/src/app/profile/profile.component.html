@@ -1,0 +1,58 @@
+<ng-container *ngIf="user() as user">
+  <mat-card class="overall">
+    <mat-card-content>
+      <img src="https://picsum.photos/200/300" />
+      <div>
+        <h4>{{ user.firstName }} {{ user.lastName }}</h4>
+        <span>{{ user.email }}</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="account-setting">
+    <mat-card-header>
+      <mat-card-title> Account settings </mat-card-title>
+      <mat-card-subtitle>
+        Here you can change your account information
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>First name</mat-label>
+        <input matInput placeholder="First name" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Last name</mat-label>
+        <input matInput placeholder="Last name" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" />
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="change-password">
+    <mat-card-header>
+        <mat-card-title> Change password </mat-card-title>
+        <mat-card-subtitle>
+            Here you can set your new password
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-form-field>
+            <mat-label>Old password</mat-label>
+            <input matInput placeholder="Old password" />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>New password</mat-label>
+            <input matInput placeholder="New password" />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Confirm new password</mat-label>
+            <input matInput placeholder="Confirm new password" />
+        </mat-form-field>
+    </mat-card-content>
+    <mat-card-footer align="end">
+        <button mat-raised-button color="primary">Change password</button>
+    </mat-card-footer>
+  </mat-card>
+</ng-container>

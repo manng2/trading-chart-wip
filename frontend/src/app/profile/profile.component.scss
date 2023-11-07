@@ -1,0 +1,41 @@
+mat-card {
+  margin-bottom: 32px;
+
+  mat-card-header {
+    margin-bottom: 24px;
+  }
+}
+
+.overall {
+  mat-card-content {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+
+    img {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+    }
+  }
+}
+
+.account-setting {
+  mat-card-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+.change-password {
+  mat-card-content {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+  }
+
+  mat-card-footer {
+    padding: 8px 16px;
+  }
+}
