@@ -3,7 +3,7 @@
     <img src="assets/logo.png" width="64px" height="64px" />
     <span>Premium SaaS</span>
   </div>
-  <div class="user">
+  <div *ngIf="user()" class="user">
     <img [matMenuTriggerFor]="menu" src="https://picsum.photos/200/300"/>
     <mat-menu #menu="matMenu">
       <button mat-menu-item routerLink="/profile">Profile</button>

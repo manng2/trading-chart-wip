@@ -1,17 +1,19 @@
 <mat-card>
   <mat-card-header> Login form </mat-card-header>
   <mat-card-content class="d-flex flex-column p-5">
-    <mat-form-field>
-      <mat-label>Email</mat-label>
-      <input matInput placeholder="Email" />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Password</mat-label>
-      <input matInput placeholder="Email" type="password" />
-    </mat-form-field>
+    <form [formGroup]="formGroup">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" formControlName="email" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Password" type="password" formControlName="password" />
+      </mat-form-field>
+    </form>
   </mat-card-content>
   <mat-card-footer align="center">
-    <button mat-raised-button color="primary">Login</button>
+    <button mat-raised-button color="primary" (click)="login()" [disabled]="formGroup.invalid">Login</button>
     <span (click)="goToSignUpPage()">Don't have an account? Register</span>
   </mat-card-footer>
 </mat-card>

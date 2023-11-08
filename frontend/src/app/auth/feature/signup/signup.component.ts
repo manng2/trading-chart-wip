@@ -1,9 +1,8 @@
 import { NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
-  inject,
+  inject
 } from '@angular/core';
 import {
   FormControl,
@@ -15,9 +14,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { matchingPasswordValidator } from '../../utils/validators/matching-password.validator';
 import { AuthService } from '../../data-access/auth.service';
+import { matchingPasswordValidator } from '../../utils/validators/matching-password.validator';
 
 @Component({
   selector: 'app-signup',
@@ -29,6 +29,7 @@ import { AuthService } from '../../data-access/auth.service';
     MatButtonModule,
     ReactiveFormsModule,
     NgIf,
+    MatSnackBarModule
   ],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss', '../auth-base.component.scss'],
@@ -37,8 +38,9 @@ import { AuthService } from '../../data-access/auth.service';
 export class SignupComponent {
   private readonly _router = inject(Router);
   private readonly _authService = inject(AuthService);
+  private readonly _snackBar = inject(MatSnackBar);
 
-  formGroup = new FormGroup({
+  readonly formGroup = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required]),
@@ -66,11 +68,11 @@ export class SignupComponent {
       email: email!,
       password: password!,
     }).subscribe({
-      next: (v) => {
-        console.log(v);
+      next: () => {
+        this._snackBar.open('Signup successful', 'Close');
       },
       error: (error) => {
-        console.log(error);
+        this._snackBar.open(error.message, 'Close');
       }
     });
   }

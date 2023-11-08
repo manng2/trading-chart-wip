@@ -9,22 +9,29 @@ export class AuthController {
 
   @Post('signup')
   async signup(@Body() signupDto: SignupDto) {
-    await this.authService.signup(signupDto);
+    const user = await this.authService.signup(signupDto);
 
     return {
       status: '201',
       message: 'Sign up successful',
+      data: {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        id: user.id,
+      },
     };
   }
 
   @Post('login')
   @HttpCode(200)
   async login(@Body() loginDto: LoginDto) {
-    await this.authService.login(loginDto);
+    const user = await this.authService.login(loginDto);
 
     return {
       status: '200',
       message: 'Login successful',
+      data: user,
     };
   }
 }

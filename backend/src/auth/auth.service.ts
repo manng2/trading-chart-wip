@@ -8,14 +8,16 @@ import { Model } from 'mongoose';
 import { IUser } from 'src/interfaces/user.interface';
 import { SignupDto } from './dto/signup.dto';
 import { LoginDto } from './dto/login.dto';
+import { uuid } from 'uuidv4';
 
 @Injectable()
 export class AuthService {
   constructor(@InjectModel('User') private userModel: Model<IUser>) {}
 
-  async signup(signupDto: SignupDto) {
+  async signup(signupDto: SignupDto): Promise<IUser> {
     const { firstName, lastName, password, email } = signupDto;
     const user = new this.userModel({
+      id: uuid(),
       firstName,
       lastName,
       password,
@@ -27,13 +29,14 @@ export class AuthService {
       throw new ConflictException('User already exists');
     }
 
-    await user.save();
+    return await user.save();
   }
 
-  async login(loginDto: LoginDto) {
+  async login(loginDto: LoginDto): Promise<Omit<IUser, 'password'>> {
     const { email, password } = loginDto;
     const user = await this.userModel.findOne({ email });
 
+    console.log(user);
     if (!user) {
       throw new UnauthorizedException('User does not exist');
     }
@@ -41,5 +44,12 @@ export class AuthService {
     if (user.password !== password) {
       throw new UnauthorizedException('Invalid credentials');
     }
+
+    return {
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+    };
   }
 }

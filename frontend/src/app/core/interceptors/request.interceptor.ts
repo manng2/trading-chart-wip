@@ -13,6 +13,8 @@ export class RequestInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    return next.handle(request);
+    const newRequest = request.clone({ url: `http://localhost:3000${request.url}`});
+    console.log(newRequest);
+    return next.handle(newRequest);
   }
 }

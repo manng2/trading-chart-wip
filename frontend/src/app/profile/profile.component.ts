@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { UserModel } from './data-access/models/user.model';
+import { UserModel } from '../core/models/user.model';
 
 @Component({
   selector: 'app-profile',
