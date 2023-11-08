@@ -4,6 +4,10 @@ mat-card {
   mat-card-header {
     margin-bottom: 24px;
   }
+
+  mat-card-footer {
+    padding: 8px 16px;
+  }
 }
 
 .overall {
@@ -33,9 +37,5 @@ mat-card {
     display: flex;
     gap: 16px;
     flex-direction: column;
-  }
-
-  mat-card-footer {
-    padding: 8px 16px;
   }
 }
