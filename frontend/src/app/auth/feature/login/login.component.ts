@@ -39,6 +39,7 @@ export class LoginComponent {
     }).subscribe({
       next: () => {
         this._snackBar.open('Login successful', 'Close');
+        this._router.navigate(['/']);
       },
       error: (error) => {
         this._snackBar.open(error.message, 'Close');
