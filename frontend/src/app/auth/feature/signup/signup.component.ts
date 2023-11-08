@@ -1,9 +1,5 @@
 import { NgIf } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -18,6 +14,8 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from '../../data-access/auth.service';
 import { matchingPasswordValidator } from '../../utils/validators/matching-password.validator';
+import { LoadingService } from 'src/app/core/services/loading.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
@@ -29,7 +27,7 @@ import { matchingPasswordValidator } from '../../utils/validators/matching-passw
     MatButtonModule,
     ReactiveFormsModule,
     NgIf,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss', '../auth-base.component.scss'],
@@ -39,6 +37,7 @@ export class SignupComponent {
   private readonly _router = inject(Router);
   private readonly _authService = inject(AuthService);
   private readonly _snackBar = inject(MatSnackBar);
+  private readonly _loadingService = inject(LoadingService);
 
   readonly formGroup = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
@@ -61,19 +60,23 @@ export class SignupComponent {
 
   signup(): void {
     const { firstName, lastName, email, password } = this.formGroup.value;
+    this._loadingService.start();
 
-    this._authService.signup({
-      firstName: firstName!,
-      lastName: lastName!,
-      email: email!,
-      password: password!,
-    }).subscribe({
-      next: () => {
-        this._snackBar.open('Signup successful', 'Close');
-      },
-      error: (error) => {
-        this._snackBar.open(error.message, 'Close');
-      }
-    });
+    this._authService
+      .signup({
+        firstName: firstName!,
+        lastName: lastName!,
+        email: email!,
+        password: password!,
+      })
+      .pipe(finalize(() => this._loadingService.stop()))
+      .subscribe({
+        next: () => {
+          this._snackBar.open('Signup successful', 'Close');
+        },
+        error: (error) => {
+          this._snackBar.open(error.message, 'Close');
+        },
+      });
   }
 }

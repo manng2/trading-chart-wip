@@ -8,6 +8,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RequestInterceptor } from './core/interceptors/request.interceptor';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
     BrowserAnimationsModule,
     MatMenuModule,
     HttpClientModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {

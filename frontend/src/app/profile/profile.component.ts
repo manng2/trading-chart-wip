@@ -17,10 +17,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { finalize, map } from 'rxjs';
 import { AuthService } from '../auth/data-access/auth.service';
 import { matchingPasswordValidator } from '../auth/utils/validators/matching-password.validator';
 import { ProfileService } from './data-access/profile.service';
-import { map, tap } from 'rxjs';
+import { LoadingService } from '../core/services/loading.service';
 
 @Component({
   selector: 'app-profile',
@@ -43,6 +44,7 @@ export class ProfileComponent {
   private readonly _authService = inject(AuthService);
   private readonly _profileService = inject(ProfileService);
   private readonly _snackBar = inject(MatSnackBar);
+  private readonly _loadingService = inject(LoadingService);
 
   readonly user = this._authService.user;
   readonly accountSettingsFormGroup = new FormGroup({
@@ -74,12 +76,15 @@ export class ProfileComponent {
 
   updateAccountSettings(): void {
     const { firstName, lastName, email } = this.accountSettingsFormGroup.value;
+    this._loadingService.start();
+
     this._profileService
       .updateAccountSettings(this.user()!.id, {
         firstName: firstName!,
         lastName: lastName!,
         email: email!,
       })
+      .pipe(finalize(() => this._loadingService.stop()))
       .subscribe({
         next: (user) => {
           this.accountSettingsFormGroup.patchValue(user);
@@ -93,8 +98,11 @@ export class ProfileComponent {
 
   changePassword(): void {
     const { oldPassword, password } = this.passwordFormGroup.value;
+    this._loadingService.start();
+
     this._profileService
       .changePassword(this.user()!.id, oldPassword!, password!)
+      .pipe(finalize(() => this._loadingService.stop()))
       .subscribe({
         next: () => {
           this.passwordFormGroup.reset();
