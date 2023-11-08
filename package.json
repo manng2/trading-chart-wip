@@ -6,7 +6,7 @@
   "scripts": {
     "fe:dev": "cd frontend && npm start",
     "be:dev": "cd backend && npm run start:dev",
-    "fe:build": "cd frontend && npm run build"
+    "fe:build": "cd frontend && npx ng build"
   },
   "author": "",
   "license": "ISC"
