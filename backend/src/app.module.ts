@@ -4,14 +4,24 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { ProfileModule } from './profile/profile.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
     AuthModule,
     ProfileModule,
-    MongooseModule.forRoot(
-      'mongodb+srv://mannguyen:zaszaszas123@cluster0.ckbyr09.mongodb.net/?retryWrites=true&w=majority',
-    ),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (config: ConfigService) => {
+        return {
+          uri: `mongodb+srv://${config.get('DATABASE_USER')}:${config.get(
+            'DATABASE_PASSWORD',
+          )}@cluster0.ckbyr09.mongodb.net/?retryWrites=true&w=majority`,
+        };
+      },
+    }),
+    ConfigModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [AppService],
