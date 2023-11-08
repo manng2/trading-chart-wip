@@ -88,6 +88,15 @@ export class ProfileComponent {
       .subscribe({
         next: (user) => {
           this.accountSettingsFormGroup.patchValue(user);
+
+          // TODO: It is not a good practice to update the user in the local storage
+          localStorage.setItem(
+            'user',
+            JSON.stringify({
+              ...this.user(),
+              ...user,
+            }),
+          );
           this._snackBar.open('Account settings updated', 'Close');
         },
         error: (error) => {
