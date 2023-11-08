@@ -4,8 +4,7 @@
   "description": "",
   "scripts": {
     "fe:dev": "cd frontend && npm start",
-    "be:dev": "cd backend && npm run start:dev",
-    "start": "cd backend && npm start"
+    "be:dev": "cd backend && npm run start:dev"
   },
   "author": "",
   "license": "ISC"
