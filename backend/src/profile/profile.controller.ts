@@ -1,4 +1,4 @@
-import { Body, Controller, Put } from '@nestjs/common';
+import { Body, Controller, Get, Put } from '@nestjs/common';
 import { UpdateAccountSettingsDto } from './dto/update-account-settings.dto';
 import { ProfileService } from './profile.service';
 import { ChangePasswordDto } from './dto/change-password.dto';
@@ -38,6 +38,14 @@ export class ProfileController {
     return {
       status: '200',
       message: 'Password changed successfully',
+    };
+  }
+
+  @Get('me')
+  me() {
+    return {
+      status: '200',
+      message: 'Test route me',
     };
   }
 }

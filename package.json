@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "fe:dev": "cd frontend && npm start",
-    "be:dev": "cd backend && npm run start:dev",
-    "fe:build": "cd frontend && npx ng build"
+    "be:dev": "cd backend && npm run start:dev"
   },
   "author": "",
   "license": "ISC"
