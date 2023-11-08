@@ -2,7 +2,6 @@
   "name": "saas-app-poc",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "fe:dev": "cd frontend && npm start",
     "be:dev": "cd backend && npm run start:dev"
