@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, map, noop } from 'rxjs';
 import { DataResponse } from 'src/app/core/models/data-response.model';
 import { UserModel } from 'src/app/core/models/user.model';
 
@@ -24,5 +24,15 @@ export class ProfileService {
           email: it.data.email,
         })),
       );
+  }
+
+  changePassword(id: string, oldPassword: string, newPassword: string): Observable<void> {
+    return this._http
+      .put('/profile/change-password', {
+        id,
+        oldPassword,
+        newPassword,
+      })
+      .pipe(map(noop));
   }
 }

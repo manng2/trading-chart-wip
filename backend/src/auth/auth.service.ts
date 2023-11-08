@@ -36,7 +36,6 @@ export class AuthService {
     const { email, password } = loginDto;
     const user = await this.userModel.findOne({ email });
 
-    console.log(user);
     if (!user) {
       throw new UnauthorizedException('User does not exist');
     }

@@ -1,6 +1,7 @@
 import { Body, Controller, Put } from '@nestjs/common';
 import { UpdateAccountSettingsDto } from './dto/update-account-settings.dto';
 import { ProfileService } from './profile.service';
+import { ChangePasswordDto } from './dto/change-password.dto';
 
 @Controller('profile')
 export class ProfileController {
@@ -24,6 +25,19 @@ export class ProfileController {
         email: user.email,
         id: user.id,
       },
+    };
+  }
+
+  @Put('change-password')
+  async changePassword(
+    @Body()
+    changePasswordDto: ChangePasswordDto,
+  ) {
+    await this.profileService.changePassword(changePasswordDto);
+
+    return {
+      status: '200',
+      message: 'Password changed successfully',
     };
   }
 }

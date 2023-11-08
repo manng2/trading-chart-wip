@@ -15,7 +15,7 @@ export class AppComponent {
   readonly user = this._authService.user;
 
   logout(): void {
-    console.log('Logout');
+    this._authService.logout();
   }
 
   goToHome(): void {
