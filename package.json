@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "fe:dev": "cd frontend && npm start",
+    "be:dev": "cd backend && npm run start:dev"
   },
   "author": "",
   "license": "ISC"

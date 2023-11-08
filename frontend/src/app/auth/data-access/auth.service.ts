@@ -3,7 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { SignupModel } from './models/signup.model';
 import { Observable, map, noop } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
   private readonly _httpClient = inject(HttpClient);
 

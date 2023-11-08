@@ -7,7 +7,9 @@ import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     AuthModule,
-    MongooseModule.forRoot('mongodb://localhost:27017/nestjs-auth'),
+    MongooseModule.forRoot(
+      'mongodb+srv://mannguyen:zaszaszas123@cluster0.ckbyr09.mongodb.net/?retryWrites=true&w=majority',
+    ),
   ],
   controllers: [AppController],
   providers: [AppService],
