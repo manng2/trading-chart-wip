@@ -76,3 +76,8 @@ You can view the demo [here](https://fancy-biscuit-d67854.netlify.app/).
 - Adopt a modular architecture by **structuring NestJS application into distinct modules**, each encapsulating a specific business domain or feature.
 
 - Utilize **NestJS exception filters** to intercept errors, and provide meaningful error responses to clients.
+
+## Limitation
+
+1. Missing JWT implementation
+2. Missing unit tests

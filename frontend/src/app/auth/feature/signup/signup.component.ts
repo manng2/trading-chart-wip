@@ -43,10 +43,7 @@ export class SignupComponent {
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(8),
-    ]),
+    password: new FormControl('', [Validators.required]),
     confirmPassword: new FormControl('', [Validators.required]),
   });
 
@@ -73,6 +70,7 @@ export class SignupComponent {
       .subscribe({
         next: () => {
           this._snackBar.open('Signup successful', 'Close');
+          this._router.navigate(['/']);
         },
         error: (error) => {
           this._snackBar.open(error.message, 'Close');
