@@ -10,6 +10,7 @@ import { ChartLogService } from './chart-log.service';
       {
         name: 'ChartLog',
         schema: ChartLogSchema,
+        collection: 'chart_logs',
       },
     ]),
   ],

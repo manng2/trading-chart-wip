@@ -41,7 +41,7 @@ export class ChartLogService {
     try {
       const chartLogs = await this.chartLogModel
         .find({ time: { $gt: time } })
-        .limit(100)
+        .limit(5)
         .exec();
 
       return chartLogs;
